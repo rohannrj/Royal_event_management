@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+
+<div class="container">
+
+    <div class="row">
+         
+         <div class="col-md-4 mt-2">
+             <h3 class="bg-secondary text-white text-center p-2">Add Product</h3>
+
+             <form action="" method="post">
+             {% csrf_token %}
+                <div class="mb-3">
+                    <label for="pid" class="form-label">Product Name</label>
+                    <input type="text" class="form-control" name="pname" id="pid" placeholder="Enter product name">
+                  </div>
+               
+                  <div class="mb-3">
+                    <label>Select Category</label>
+                    <select class="form-select" name="pcat" aria-label="Default select example">
+                       
+                        <option value="1">Mobile</option>
+                        <option value="2">Cloths</option>
+                        <option value="3">Shoes</option>
+                      </select>
+                  </div>
+                 
+                  <div class="mb-3">
+                    <label for="priceid" class="form-label">Product Price</label>
+                    <input type="Number" class="form-control" name="pprice" id="priceid" placeholder="Enter product price">
+                  </div>
+
+                  <div class="mb-3">
+                    <label>Product Status </label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status" value="1" id="radio1"checked>
+                        <label class="form-check-label" for="radio1">
+                          Active
+                        </label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status" value="0" id="radio2" >
+                        <label class="form-check-label" for="radio2">
+                          Inactive
+                        </label>
+                      </div>
+
+                      <div class="my-3">
+                      
+                        <button  type="submit"class="btn btn-danger">Add Product</button>
+
+
+                      </div>
+
+                  </div>
+
+             </form>
+
+         </div>
+  
+         <div class="col-md-8 mt-2">
+            <h3 class="bg-secondary text-white text-center p-2">View Product</h3>
+            <table class="table table-hover">
+              <tr>
+                     <th>Product Name</th>
+                     <th>Category</th>
+                     <th>Price</th>
+                     <th>status</th>
+                     <th>Edit</th>
+                     <th>Delete</th>
+              </tr>
+        {% for x in products  %}
+
+              <tr>
+                    <td>{{x.name}}</td>
+                    {% if x.cat == 1 %}
+                    <td>Mobile</td>
+                    {% elif x.cat == 2 %}
+                    <td>Shoes</td>
+                    {% else %}
+                    <td>Cloths</td>
+                    {% endif %}
+
+                    <td>{{x.price}}</td>
+                    {% if x.status == 1 %}
+                    <td class="text-success"><b>Active</b></td>
+                    {% else %}
+                    <td class="text-danger"><b>Inactive</b></td>
+                    {% endif %}
+                    <td><a href="/editproduct/{{x.id}}"><button class="btn btn-warning">Edit</button></a></td>
+                    <td><a href="/delproduct/{{x.id}}"><button class="btn btn-danger">Delete</button></a></td>
+              </tr>
+
+
+
+         {% endfor %}
+
+
+            </table>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+  </div>
+
+{% endblock 'main' %}

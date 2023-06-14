@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+
+
+
+<div class="row ">
+    <div class="col-md-2 bg-secondary ">
+    </ul><!--sort end-->
+
+          
+          <h4 class="text-white">Events</h4>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link text-white " href="/catfilter/1"><h5>birthday</h5></a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/catfilter/2"><h5>weddiing</h5></a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/catfilter/3"><h5>Live music</h5></a>
+            </li>
+           
+               
+
+      </div><!--sidebar end-->
+
+<div class="col-md-10 bg-secondary">
+   <div class="row">
+      {% for x in products %}        
+       <div class="col-md-4 mb-4">
+        <div class="" width="200" height="200">
+            <img src="{{x.pimage.url}}" class="card-img-top " alt="" width="250px" height="250px">
+            <div class="card-body">
+              <h5 class="card-title">{{x.name}}</h5>
+              
+              {% if x.cat == 1 %}
+                 <p class="text-light">birthday</p>
+              {% elif x.cat == 2 %}
+                 <p class="card-text">wedding</p> 
+               {% elif x.cat == 3 %}  
+                 <p class="card-text">Live music</p>
+                 {% endif %}
+
+              <h6>Rs.{{x.price}}</h6>
+              <a href="/pdetails/{{x.id}}" class="btn btn-primary">See Details</a>
+            </div>
+          </div><!--card ends-->
+          </div><!--col ends-->
+{% endfor %}
+          </div><!--row ends-->
+        </div>
+      </div>
+{% endblock 'main' %}
